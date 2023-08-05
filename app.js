@@ -3,7 +3,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-// var http = require("http");
+var http = require("http");
 var Sentry = require("@sentry/node");
 var Tracing = require("@sentry/tracing");
 var fileUpload = require("express-fileupload");
@@ -133,6 +133,6 @@ app.use(function (err, req, res, next) {
 });
 
 // init server
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
 module.exports = { app, server };
