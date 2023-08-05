@@ -38,7 +38,7 @@ module.exports = {
         throw { cache, message: "Incorrect Password", code: 400 };
       }
 
-      const token = jwt.sign(checkEmail.dataValues, process.env.APP_SECRET_KEY);
+      const token = jwt.sign(checkEmail.dataValues, process.env.KEY);
 
       res.status(200).json({
         cache,
@@ -87,25 +87,12 @@ module.exports = {
       }
 
       const hashPassword = await bcrypt.hash(requestBody.password, bcryptSalt);
-      const photo = [
-        "https://www.w3schools.com/howto/img_avatar.png",
-        "https://www.w3schools.com/howto/img_avatar2.png",
-        "https://www.w3schools.com/w3images/avatar2.png",
-        "https://www.w3schools.com/w3images/avatar6.png",
-        "https://www.w3schools.com/w3images/avatar5.png",
-      ];
-
-      function randomIntFromInterval(min, max) {
-        // min and max included
-        return Math.floor(Math.random() * (max - min + 1) + min);
-      }
-
-      const rndInt = randomIntFromInterval(0, 5);
 
       await model.users.create({
         ...requestBody,
         password: hashPassword,
-        photo: photo[rndInt],
+        photo:
+          "https://res.cloudinary.com/dhxpwcu5n/image/upload/v1691223663/cariin/profile/user-default_j5mjvp.jpg",
         role: (requestBody.role ?? "user").trim().toLowerCase(),
       });
 

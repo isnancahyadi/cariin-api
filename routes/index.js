@@ -115,4 +115,9 @@ public_deletes.map((result) =>
   )
 );
 
+/* GET home page. */
+router.get("/", function (req, res, next) {
+  res.send("Hello, API is running well. ^_^");
+});
+
 module.exports = router;

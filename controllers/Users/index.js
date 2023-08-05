@@ -13,7 +13,7 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       const request = await model.users.findOne({
         where: { id },
@@ -38,7 +38,7 @@ module.exports = {
       const requestBody = req.body;
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       const payload = {
         fullname: requestBody?.fullname,
@@ -71,7 +71,7 @@ module.exports = {
       const { photo } = req?.files ?? {};
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       let mimeType = photo.mimetype.split("/")[1];
       let allowFile = ["jpeg", "jpg", "png", "webp"];
@@ -93,6 +93,7 @@ module.exports = {
       }
 
       const upload = await cloudinary.uploader.upload(photo.tempFilePath, {
+        folder: "cariin/profile",
         public_id: new Date().toISOString(),
       });
 
@@ -129,7 +130,7 @@ module.exports = {
       const requestBody = req.body;
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       const request = await model.users.findOne({
         where: { id },
@@ -166,7 +167,7 @@ module.exports = {
       const deleteId = req.params.id;
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       const request = await model.users.findOne({
         where: { id },
@@ -210,7 +211,7 @@ module.exports = {
       const { photo } = req?.files ?? {};
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       const request = await model.users.findOne({
         where: { id },
@@ -238,6 +239,7 @@ module.exports = {
       }
 
       const upload = await cloudinary.uploader.upload(photo.tempFilePath, {
+        folder: "cariin/job_pics",
         public_id: new Date().toISOString(),
       });
 
@@ -281,7 +283,7 @@ module.exports = {
       const deleteId = req.params.id;
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       const request = await model.users.findOne({
         where: { id },
@@ -327,9 +329,9 @@ module.exports = {
       const requestBody = req.body;
 
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id, fullname } = jwt.verify(
+      const { id, fullname, email } = jwt.verify(
         authorization,
-        process.env.APP_SECRET_KEY
+        process.env.KEY
       );
 
       const checkRedis = await redis.get(`target_id_${target_id}`);
@@ -358,7 +360,7 @@ module.exports = {
       });
 
       const mailOptions = {
-        from: "bilkisismail07@gmail.com",
+        from: email,
         to: request?.dataValues?.email,
         subject: requestBody?.subject,
         html: mustache.render(template, {
@@ -396,7 +398,7 @@ module.exports = {
   getContact: async (req, res) => {
     try {
       const authorization = req.headers.authorization.slice(6).trim();
-      const { id } = jwt.verify(authorization, process.env.APP_SECRET_KEY);
+      const { id } = jwt.verify(authorization, process.env.KEY);
 
       let request,
         cache = false;
