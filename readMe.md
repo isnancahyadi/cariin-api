@@ -23,7 +23,7 @@ CariIn API serves as the backend for the CariIn job posting application. It hand
 Visit the link below for demo.
 
 - :globe_with_meridians: [CariIn Webiste Demo](https://cariin.vercel.app/)
-- :link: [CariIn API Demo](https://blush-cow-tux.cyclic.app/)
+- :link: [CariIn API Demo](https://mysterious-puce-slacks.cyclic.app/)
 
 ## Technologies Used
 
@@ -42,8 +42,8 @@ The project is built using the following stack:
 1. Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/isnancahyadi/cariin-api-v2.git
-cd cariin-api-v2
+git clone https://github.com/isnancahyadi/cariin-api.git
+cd cariin-api
 ```
 
 2. Install the required dependencies using npm:
