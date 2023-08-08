@@ -136,8 +136,12 @@ module.exports = {
         where: { id },
       });
 
+      const lowerCaseSkill = requestBody?.skills.map((word) =>
+        word.toLowerCase()
+      );
+
       const skills = request?.dataValues?.skills ?? [];
-      const uniq = [...new Set([...skills, ...requestBody?.skills])];
+      const uniq = [...new Set([...skills, ...lowerCaseSkill])];
 
       const payload = {
         ...request?.dataValues,
